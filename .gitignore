@@ -1,0 +1,80 @@
+# Byte-compiled files and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Flask-related files
+instance/
+*.db
+*.sqlite3
+
+# Environment variables and secrets
+.env
+*.env
+config.py
+settings.py
+
+# Virtual environment
+venv/
+env/
+*.egg-info/
+
+# Logs and debugging
+*.log
+logs/
+*.bak
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Python testing files
+.tox/
+.nox/
+coverage/
+.coverage
+.pytest_cache/
+htmlcov/
+.cache/
+
+# Build and distribution files
+build/
+dist/
+*.egg
+*.egg-info/
+.eggs/
+
+# Temporary and backup files
+*.tmp
+*.swp
+*.bak
+*.old
+*.orig
+*.save
+
+# Flask-Specific Extensions
+.mypy_cache/
+.dmypy.json
+.pyre/
+
+# Freshchat-related files
+freshchat_logs/
+freshchat_token.json
+
+# Assistant API-specific files
+assistant_api_keys.json
+
+# Security-related exclusions
+*.pem
+*.crt
+*.key
+
+# Custom folders to exclude
+threads_db
+care_threads_dv
