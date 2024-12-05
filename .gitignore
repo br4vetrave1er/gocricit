@@ -1,0 +1,6 @@
+threads_db
+.env
+app.log
+venv/
+__pycache__/
+care_threads_db
