@@ -1,24 +1,40 @@
+import base64
 from functools import wraps
 from flask import current_app, jsonify, request
 import logging
 import hashlib
 import hmac
+from Crypto.PublicKey import RSA
+from Crypto.Signature import PKCS1_v1_5
+from Crypto.Hash import SHA256
+import os
+from dotenv import load_dotenv
 
+
+load_dotenv()
+PUBLIC_KEY = os.getenv("PUBLIC_KEY")
+# Replace literal \n with actual newlines
+PUBLIC_KEY = PUBLIC_KEY.replace("\\n", "\n")
 
 def validate_signature(payload, signature):
     """
     Validate the incoming payload's signature against our expected signature
     """
     # Use the App Secret to hash the payload
-    expected_signature = hmac.new(
-        bytes(current_app.config["APP_SECRET"], "latin-1"),
-        msg=payload.encode("utf-8"),
-        digestmod=hashlib.sha256,
-    ).hexdigest()
+    try:
+        decoded_signature = base64.b64decode(signature)
 
-    # Check if the signature matches
-    return hmac.compare_digest(expected_signature, signature)
+        # load the public key
+        rsa_key = RSA.import_key(PUBLIC_KEY)
 
+
+        hashed_payload = SHA256.new(payload)
+
+        PKCS1_v1_5.new(rsa_key).verify(hashed_payload, decoded_signature)
+        return True
+    except (ValueError, TypeError) as e:
+        logging.error(f"Signature validation failed: {e}")
+        return False
 
 def signature_required(f):
     """
@@ -27,10 +43,8 @@ def signature_required(f):
 
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        signature = request.headers.get("X-Hub-Signature-256", "")[
-            7:
-        ]  # Removing 'sha256='
-        if not validate_signature(request.data.decode("utf-8"), signature):
+        signature = request.headers.get("X-Hub-Signature-256", "").replace("sha256=", "") # Removing 'sha256='
+        if not validate_signature(request.data, signature):
             logging.info("Signature verification failed!")
             return jsonify({"status": "error", "message": "Invalid signature"}), 403
         return f(*args, **kwargs)

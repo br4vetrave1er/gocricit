@@ -1,0 +1,43 @@
+Metadata-Version: 2.1
+Name: cafeteria
+Version: 0.22.3
+Summary: Cafeteria: A convenience package providing various building blocks enabling pythonic patterns.
+Home-page: https://github.com/abn/cafeteria
+License: APLv2
+Author: Arun Babu Neelicattu
+Author-email: arun.neelicattu@gmail.com
+Requires-Python: >=3.8,<4.0
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: License :: Other/Proprietary License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Provides-Extra: yaml
+Requires-Dist: PyYAML (>=3.13,!=6.0.0,!=5.4.0,!=5.4.1)
+Project-URL: Repository, https://github.com/abn/cafeteria
+Description-Content-Type: text/x-rst
+
+|pypi| |travis| |black| |dependabot|
+
+Python Cafeteria Package
+========================
+
+A convenience package providing various building blocks for pythonic patterns.
+
+
+.. |pypi| image:: https://badge.fury.io/py/cafeteria.svg
+    :target: https://badge.fury.io/py/cafeteria
+.. |travis| image:: https://travis-ci.org/abn/cafeteria.svg?branch=master
+    :target: https://travis-ci.org/abn/cafeteria
+.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/ambv/black
+.. |dependabot| image:: https://api.dependabot.com/badges/status?host=github&repo=abn/cafeteria
+    :target: https://dependabot.com
+

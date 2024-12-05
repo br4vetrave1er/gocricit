@@ -16,8 +16,13 @@ def main():
     - Use port 8000
     - Enable debugging (for development purposes only)
     """
-    logging.info("Starting Flask app on http://0.0.0.0:8000")
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    logging.info("Starting Flask app on http://0.0.0.0:80")
+    app.run(debug=True, port=8000,host="0.0.0.0", ssl_context=
+            ("/etc/letsencrypt/live/gocirict.koreacentral.cloudapp.azure.com/fullchain.pem",
+              "/etc/letsencrypt/live/gocirict.koreacentral.cloudapp.azure.com/privkey.pem"))
 
 if __name__ == "__main__":
     main()
+
+
+# sudo journalctl -u goCricit.service -f

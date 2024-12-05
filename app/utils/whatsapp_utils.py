@@ -6,9 +6,9 @@ import json
 from dotenv import load_dotenv
 import requests
 from flask import jsonify, current_app
-from start.assistent_quickstart import sales_connect
+from ..start.assistent_quickstart import sales_connect
 from ..functions.agent_funtions import create_freshworks_contact, upsert_freshworks_contact
-from start.agent import generate_response, generate_care_response
+from ..start.agent import generate_response, generate_care_response
 import os
 import ast
 
@@ -210,12 +210,9 @@ def is_valid_whatsapp_message(body):
         bool: True if the payload is valid, False otherwise.
     """
     try:
-        
-        return (
-            body.get("object")
-            and body.get("entry")
-            and body["entry"][0].get("changes")
-            and body["entry"][0]["changes"][0].get("value", {}).get("messages")
-        )
+        # Check that action is 'message_create' and message data exists
+        if body.get('actor').get('actor_type') != 'agent':
+            return True
+        return False
     except (IndexError, KeyError, TypeError):
         return False
