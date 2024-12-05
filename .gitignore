@@ -75,6 +75,6 @@ assistant_api_keys.json
 *.crt
 *.key
 
-# Custom folders to exclude
+# Custom files to exclude
 threads_db
 care_threads_dv
